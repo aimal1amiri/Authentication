@@ -1,0 +1,35 @@
+{
+  "name": "authentication",
+  "version": "1.0.0",
+  "description": "",
+  "main": "back-end/server.js",
+  "scripts": {
+    "amiri": "nodemon back-end/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aimal1amiri/Authentication.git"
+  },
+  "keywords": [],
+  "author": "",
+  "type": "module",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aimal1amiri/Authentication/issues"
+  },
+  "homepage": "https://github.com/aimal1amiri/Authentication#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "mailtrap": "^3.4.0",
+    "mongoose": "^8.7.1"
+  },
+  "devDependencies": {
+    "nodeman": "^1.1.2",
+    "nodemon": "^3.1.7"
+  }
+}
