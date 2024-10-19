@@ -1,6 +1,6 @@
 import { Userr } from "../models/user-model.js"
 import bcryptjs from 'bcryptjs';
-import { generateVerificationCode } from "../utils/generateVerificationCose.js";
+import { generateVerificationCode } from "../utils/generateVerificationCode.js";
 import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie.js";
 
 
@@ -25,7 +25,7 @@ export const signup = async(req,res) => {
             {email, 
             password:hashedPassword,
             name, 
-            verificationToken, 
+            generateVerificationToken, 
             verificationTokenExpiresAt:Date.now()+24*60*60*1000
         })
 
