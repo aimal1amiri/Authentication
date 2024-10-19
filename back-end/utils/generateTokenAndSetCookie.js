@@ -9,7 +9,7 @@ export const generateTokenAndSetCookie= (res,userId) => {
         httpOnly:true, //it prevents XSS attacks
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict", //prevents attact of csrf
-        maxValidTime: 7 * 24 * 60 * 60 *1000, 
+        maxAge: 7 * 24 * 60 * 60 *1000, 
 
     });
 
