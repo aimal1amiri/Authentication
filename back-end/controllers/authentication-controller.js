@@ -2,6 +2,7 @@ import { Userr } from "../models/user-model.js"
 import bcryptjs from 'bcryptjs';
 import { generateVerificationCode } from "../utils/generateVerificationCode.js";
 import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie.js";
+import { sendVerificationEmail } from "../mailTrap/email.js";
 
 
 export const signup = async(req,res) => {
@@ -36,6 +37,10 @@ export const signup = async(req,res) => {
         await user.save();
 
         generateTokenAndSetCookie(res, user._id);
+        
+        await sendVerificationEmail(user.email, verificationToken);
+
+
 
         res.status(201).json({success:true, message:"Account created successfully" ,user:{...user._doc, password:undefined}});
 
