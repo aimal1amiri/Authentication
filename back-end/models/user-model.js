@@ -33,4 +33,4 @@ const userSchema = new mongoose.Schema({
 // the timestamps will add two attributes to the schema like -createdat- and -updatedat- 
 
 
-export const Userr =mongoose.model('User', userSchema);
+export const Userr =mongoose.model('User1', userSchema);
