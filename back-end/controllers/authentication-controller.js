@@ -19,13 +19,17 @@ export const signup = async(req,res) => {
 
         const hashedPassword= await bcryptjs.hash(password,10);
         const generateVerificationToken = generateVerificationCode();
+        const verificationToken = generateVerificationToken;
+
+
+        //console.log(generateVerificationToken)
 
 
         const user = new Userr(
             {email, 
             password:hashedPassword,
             name, 
-            generateVerificationToken, 
+            verificationToken, 
             verificationTokenExpiresAt:Date.now()+24*60*60*1000
         })
 
