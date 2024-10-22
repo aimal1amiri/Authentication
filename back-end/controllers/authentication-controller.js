@@ -73,10 +73,11 @@ export const verifyEmail = async(req,res) => {
 
         await sendWelcomeEmail(user.email, user.name);
 
-        //below res is not working. check it again.
-        res.status(200).json({success:true, message:"Email verified successfully", user:{...user_doc, password:undefined,}})
-    } catch (error) {
         
+        res.status(200).json({success:true, message:"Email verified successfully", user:{...user._doc, password:undefined,},})
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({success:false,message:"Server Error"});        
     }
 };
 
@@ -85,5 +86,6 @@ export const login = async(req,res) => {
 }
 
 export const signout = async(req,res) =>{
-    res.send("signout route")
+    res.clearCookie("token");
+    res.status(200).json({success:true, message:"Signout successfully."});
 }
