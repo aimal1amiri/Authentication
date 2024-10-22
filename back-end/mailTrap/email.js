@@ -24,7 +24,7 @@ export const sendVerificationEmail = async (email, verificationToken) => {
 }
 
 export const sendWelcomeEmail=async(email,name)=>{
-    const recipient=[{email}]
+    const recipient=[{email}];
 
     try {
         const response=await client.send({
@@ -32,7 +32,7 @@ export const sendWelcomeEmail=async(email,name)=>{
             to:recipient,
             template_uuid:"5744fbd3-9e9d-4f68-b935-2ad55a7e6fb4",
             template_variables:{
-                "company_info_name":"Cineos",
+                company_info_name:"Cineos",
                 name:name,
 
             },
