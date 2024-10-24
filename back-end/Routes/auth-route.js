@@ -1,7 +1,11 @@
 import express from "express";
-import { signup, login, signout , verifyEmail, forgotPassword, resetPassword} from "../controllers/authentication-controller.js";
+import { signup, login, signout , verifyEmail, forgotPassword, resetPassword , checkUserAuthentication} from "../controllers/authentication-controller.js";
+import { verifyToken } from "../middleware/verifyToken.js";
 
 const router = express.Router();
+
+//when page is refreshed, it will check, if the user is authenticated or not.
+router.get("/check-auth", verifyToken, checkUserAuthentication);
 
 router.post("/signup", signup)
 

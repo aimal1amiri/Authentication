@@ -188,3 +188,19 @@ export const signout = async(req,res) =>{
     res.clearCookie("token");
     res.status(200).json({success:true, message:"Signout successfully."});
 }
+
+export const checkUserAuthentication = async(req, res) =>{
+    try {
+        const user = await Userr.findById(req.userId)
+
+        if(!user){
+            return res.status(400).json({success:false, message:"User not found"})
+        }
+
+        res.status(200).json({success:true, user:{ ...user._doc, password:undefined}});
+    } catch (error) {
+
+        res.status(400).json({success:false,message:error.message});
+        
+    }
+}
