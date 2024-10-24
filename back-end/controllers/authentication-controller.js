@@ -116,13 +116,14 @@ export const forgotPassword = async(req,res) =>{
 
     try {
         const user = await Userr.findOne({email });
+        
 
         if(user){
         //generating reset token
         const resetToken = crypto.randomBytes(20).toString("hex");
-        const resetTokenExpiresAt= Date.now() + 1*60*60*1000; //it is 1 hours. the token will be valid for 1 hours.
+        const resetTokenExpiresAt= Date.now() + 4*60*60*1000; //it is 1 hours. the token will be valid for 1 hours.
 
-        user.resetPasswordToken=resetToken;
+        user.resetPasswordToken=":"+ resetToken;
         user.resetPasswordExpiresAt=resetTokenExpiresAt;
 
         await user.save();
@@ -144,13 +145,18 @@ export const resetPassword = async(req,res) =>{
         //in -auth-routes- file , in url, we wrote the token that is why we also wrote here to get that token
         const {token}=req.params;
 
-        const {password}=req.params;
+        const {password}=req.body;
+
+        console.log(token);
+        console.log(password);
 
         const user= await Userr.findOne({
             resetPasswordToken:token,
             resetPasswordExpiresAt:{$gt:Date.now()},
 
         });
+        
+        console.log(user);
 
         if(!user){
             return res.status(400).json({success:false,message:"Invalid or token is expired"});
