@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { motion} from "framer-motion";
 import {User, Mail, Lock} from "lucide-react";
 import Input from "../components/Input";
+import { Link } from 'react-router-dom';
+import PasswordStrengthMeter from '../components/PasswordStrengthMeter';
 
 const SignUpPage = () => {
 
@@ -26,13 +28,21 @@ const SignUpPage = () => {
           <Input icon={Mail} type='email' placeholder='Email Address' value={email} onChange={(e) => setEmail(e.target.value)} />
           <Input icon={Lock} type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
 
-          <motion.button className='mt-5 w-full py-3 px-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-lg shadow-lg
-          hover:from-green-500 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition duration-200' 
+          <PasswordStrengthMeter password={password} />
+
+          <motion.button className='mt-5 w-full py-3 px-4 bg-gradient-to-r from-orange-500 to-amber-600 text-white font-bold rounded-lg shadow-lg
+          hover:from-orange-500 hover:to-amber-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2  transition duration-200' 
           whileHover={{scale:1.02}} whileTap={{scale:0.98}} type='submit'> Sign Up
 
           </motion.button>
 
         </form>
+      </div>
+      <div className='px-8 py-4 bg-orange-500 bg-opacity-100 flex justify-center'>
+        <p className='text-sm text-white'>
+          Already have an account? {""}
+          <Link to={"/login"} className='text-amber-800 hover:underline'>  Login </Link>
+        </p>
       </div>
 
     </motion.div>
