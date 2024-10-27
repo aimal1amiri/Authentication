@@ -8,7 +8,7 @@ function App() {
  
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-950 via-amber-500 to-yellow-950 flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-orange-800 via-amber-500 to-orange-800 flex items-center justify-center relative overflow-hidden">
       
       <FloatingShape color="bg-orange-500" size="w-64 h-64" top="-5%" left="10%" delay={0} />
       <FloatingShape color="bg-orange-500" size="w-48 h-48" top="70%" left="80%" delay={5} />
