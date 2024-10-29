@@ -11,7 +11,34 @@ const EmailVerifyPage = () => {
   const inputRef=useRef([]);
   const navigate = useNavigate();
 
-  const handleChange =(index,value) => {};
+  const handleChange =(index,value) => {
+    const newCode =[...codeDigit]
+
+    //when someone copy the 6-digit code when it try to paste so it can be pasted in box
+    if(value.length > 1) {
+      const pastedCode = value.slice(0,6).split("");
+      for(let i =0; i <6 ; i++){
+        newCode[i] = pastedCode[i] || "";
+      }
+      setCodeDigit(newCode);
+
+
+      //focus on the last non-empty input or the first empty one
+      const lastFilledIndex = newCode.findLastIndex((digit) => digit !== "");
+      const focusIndex = lastFilledIndex < 5 ? lastFilledIndex + 1 : 5 ;
+      inputRef.current[focusIndex].focus();
+
+    }else{
+      newCode[index]= value;
+      setCodeDigit(newCode);
+
+      //move focus to the next input field if value is entered
+      if(value && index < 5){
+        inputRef.current[index + 1].focus();
+      }
+
+    }
+  };
 
   const handleKeyDown = (index, e) => {
     if(e.key === "Backspace" && !codeDigit[index] && index > 0) {
@@ -45,15 +72,15 @@ const EmailVerifyPage = () => {
               value={digit}
               onChange={(e) => handleChange(index, e.target.value)}
               onKeyDown={(e) => handleKeyDown(index, e)}
-              className='w-12 h-12 text-center text-2xl font-bold bg-white text-white border-2 border-amber-400 rounded-lg focus:border-orange-500 focus:outline-none'
-              >
-              </input>
+              className='w-12 h-12 text-center text-2xl font-bold bg-white text-black border-2 border-amber-400 rounded-lg focus:border-orange-500 focus:outline-none'
+              />
+              
             ))}
 
           </div>
 
           <motion.button 
-          whileHover={{scale:1.05, opacity:90}} 
+          whileHover={{scale:1.05}} 
           whileTap={{scale:0.95}} 
           type='submit' 
           disabled={isLoading || codeDigit.some((digit) => !digit)}
