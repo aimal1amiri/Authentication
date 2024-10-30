@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import {motion} from "framer-motion";
 
@@ -48,6 +48,20 @@ const EmailVerifyPage = () => {
 
   const isLoading = false;
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const verificationCode =codeDigit.join("");
+
+    //purpose of alert is for knowing that function is working
+    alert(`verification code is submited ${verificationCode}`);
+      }
+
+  useEffect(() => {
+    if (codeDigit.every(digit => digit !='')){
+      handleSubmit(new Event('submit'))
+    }
+  }, [codeDigit])
+
 
 
   return (
@@ -61,7 +75,7 @@ const EmailVerifyPage = () => {
           Enter the 6-digit code sent to your email address.
         </p>
 
-        <form className='space-y-6 '>
+        <form onSubmit={handleSubmit} className='space-y-6 '>
           <div className='flex justify-between'>
             {codeDigit.map((digit, index) => (
               <input 
