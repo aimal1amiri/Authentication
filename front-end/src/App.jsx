@@ -4,9 +4,22 @@ import SignUpPage from "./pages/SignUpPage.jsx"
 import LoginPage from "./pages/LoginPage.jsx";
 import EmailVerifyPage from "./pages/EmailVerifyPage.jsx";
 
+import {Toaster} from 'react-hot-toast'
+import { useAuthenticationStore } from "./store/authentication-Store.jsx";
+import { useEffect } from "react";
+
 
 function App() {
  
+  const {isCheckingUserAuth, checkUserAuthentication, isAuthenticated, user} = useAuthenticationStore();
+
+  useEffect(() => {
+    checkUserAuthentication()
+  },[checkUserAuthentication]);
+
+  console.log("isauthentcated: ",isAuthenticated);
+  console.log("user",user);
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-800 via-amber-500 to-orange-800 flex items-center justify-center relative overflow-hidden">
@@ -21,6 +34,8 @@ function App() {
       <Route path="/login" element={<LoginPage/>}/>
       <Route path="/verify-email" element={<EmailVerifyPage/>} />
       </Routes>
+
+      <Toaster/>
 
     </div>
 
