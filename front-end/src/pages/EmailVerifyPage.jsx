@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import {motion} from "framer-motion";
+import { useAuthenticationStore } from '../store/authentication-Store';
+import toast from "react-hot-toast";
 
 
 const EmailVerifyPage = () => {
@@ -11,13 +13,17 @@ const EmailVerifyPage = () => {
   const inputRef=useRef([]);
   const navigate = useNavigate();
 
+ //const isLoading = false;
+
+  const {verifyEmailDigits, error, isLoading} = useAuthenticationStore();
+
   const handleChange =(index,value) => {
     const newCode =[...codeDigit]
 
     //when someone copy the 6-digit code when it try to paste so it can be pasted in box
     if(value.length > 1) {
       const pastedCode = value.slice(0,6).split("");
-      for(let i =0; i <6 ; i++){
+      for(let i =0; i < 6 ; i++){
         newCode[i] = pastedCode[i] || "";
       }
       setCodeDigit(newCode);
@@ -46,15 +52,24 @@ const EmailVerifyPage = () => {
     }
   };
 
-  const isLoading = false;
+  
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const verificationCode =codeDigit.join("");
 
     //purpose of alert is for knowing that function is working
-    alert(`verification code is submited ${verificationCode}`);
-      }
+    //alert(`verification code is submited ${verificationCode}`);
+    
+    try {
+      await verifyEmailDigits(verificationCode);
+      navigate("/");
+      toast.success("Email verified!");
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
 
   useEffect(() => {
     if (codeDigit.every(digit => digit !='')){
@@ -92,6 +107,8 @@ const EmailVerifyPage = () => {
             ))}
 
           </div>
+
+          {error && <p className='text-red-500 font-semibold mt-2'>{error}</p>}
 
           <motion.button 
           whileHover={{scale:1.05}} 

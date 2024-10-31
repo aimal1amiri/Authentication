@@ -4,6 +4,8 @@ import SignUpPage from "./pages/SignUpPage.jsx"
 import LoginPage from "./pages/LoginPage.jsx";
 import EmailVerifyPage from "./pages/EmailVerifyPage.jsx";
 
+import {Toaster} from 'react-hot-toast'
+
 
 function App() {
  
@@ -21,6 +23,8 @@ function App() {
       <Route path="/login" element={<LoginPage/>}/>
       <Route path="/verify-email" element={<EmailVerifyPage/>} />
       </Routes>
+
+      <Toaster/>
 
     </div>
 
