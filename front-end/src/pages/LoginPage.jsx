@@ -1,17 +1,22 @@
 import React, { useState } from 'react'
 import {motion} from "framer-motion";
 import { Mail, Lock, Loader } from 'lucide-react';
-import {Link} from "react-router-dom"
+import {Link, useAsyncValue} from "react-router-dom"
 import Input from '../components/Input';
+import { useAuthenticationStore } from '../store/authentication-Store';
 
 const LoginPage = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const isLoading= false;
+  //const isLoading= false;
+  const {login, isLoading, error}= useAuthenticationStore();
 
-  const handleLogin = (e) =>{
+
+  const handleLogin = async (e) =>{
     e.preventDefault();
+
+    await login(email,password)
 
   }
 
@@ -34,6 +39,7 @@ const LoginPage = () => {
             </Link>
           
           </div>
+          {error && <p className='text-red-500 font-semibold mb-4'>{error}</p>}
 
           <motion.button className='mt-1 w-full py-3 px-4 bg-gradient-to-r from-orange-500 to-amber-600 text-white font-bold rounded-lg shadow-lg
           hover:from-orange-500 hover:to-amber-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2  transition duration-200' 

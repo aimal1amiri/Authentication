@@ -5,7 +5,7 @@ import { verifyToken } from "../middleware/verifyToken.js";
 const router = express.Router();
 
 //when page is refreshed, it will check, if the user is authenticated or not.
-router.get("/check-auth", verifyToken, checkUserAuthentication);
+router.get("/user-check-auth", verifyToken, checkUserAuthentication);
 
 router.post("/signup", signup)
 
