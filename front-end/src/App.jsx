@@ -8,6 +8,7 @@ import {Toaster} from 'react-hot-toast'
 import { useAuthenticationStore } from "./store/authentication-Store.jsx";
 import { useEffect } from "react";
 import HomePage from "./pages/HomePage.jsx";
+import LoadingSpinner from "./components/LoadingSpinner.jsx";
 
 //protecting the routes that requires authurized users only
 
@@ -50,6 +51,11 @@ function App() {
   useEffect(() => {
     checkAuth()
   },[checkAuth]);
+
+  console.log("it is checkAuth: ",isCheckingAuth)
+
+  if(isCheckingAuth) return <LoadingSpinner/>
+  
 
   console.log("isauthentcated: ",isAuthenticated);
   console.log("user",user);
