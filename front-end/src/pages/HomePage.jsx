@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { Children } from 'react'
 import {motion} from 'framer-motion';
 import { useAuthenticationStore } from '../store/authentication-Store';
 import { formatDate } from '../utils/date';
+import { Navigate } from 'react-router-dom';
 
 
 const HomePage = () => {
-  const {user} = useAuthenticationStore();
+  const {user, logout} = useAuthenticationStore();
+
+  const handleLogout = () => {
+    //<Navigate to="/login" replace />
+    logout();
+    window.location.reload();
+  }
+  /*
+   const RedirectToLoginPage = ({children}) => {
+    return <Navigate to="/login" replace />
+  }*/
+
   return (
     <motion.div
     initial={{opacity:0,scale:0.9}}
@@ -29,9 +41,9 @@ const HomePage = () => {
           <p className='text-gray-700'>Name: {user.name}</p>
           <p className='text-gray-700'>Email: {user.email }</p>
         </motion.div>
-      </div>
+      
 
-      <motion.div className='p-4 bg-white bg-opacity-50 rounded-lg border border-gray-700 mb-10'
+      <motion.div className='p-4 bg-white bg-opacity-50 rounded-lg border border-gray-700 '
       initial={{opacity:0, y:20}}
       animate={{opacity:1, y:0}}
       transition={{delay:0.4}}
@@ -45,6 +57,26 @@ const HomePage = () => {
           <span className='font-bold'>Last Login: </span>
           {user.lastLogin ? formatDate(user.lastLogin): "You just singned up!"}
         </p>
+
+      </motion.div>
+
+      </div>
+
+      <motion.div
+      initial={{opacity:0,y:20}}
+      animate={{opacity:1,y:0}}
+      transition={{delay:0.6}}
+      className='mt-4'
+      >
+        <motion.button
+        whileHover={{scale:1.05}}
+        whileTap={{scale:0.95}}
+        onClick={handleLogout}
+        className='w-full py-3 px-4 bg-gradient-to-r from-orange-500 to-amber-600 text-white font-bold rounded-lg shadow-lg hover:from-orange-600 hover:to-amber-600 focus:outline-none focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-900 '
+        >
+          Logout
+
+        </motion.button>
 
       </motion.div>
 

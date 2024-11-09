@@ -21,8 +21,9 @@ const ProtectedRoute = ({children}) => {
     return <Navigate to="/login" replace/>
 
   }
+  //console.log("is verified value: ",user.isVerified);
 
-  if(!(user.isVerified)){
+  if(!user.isVerified){
     return <Navigate to="/verify-email" replace />
   }
 
