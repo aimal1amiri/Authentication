@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import HomePage from "./pages/HomePage.jsx";
 import LoadingSpinner from "./components/LoadingSpinner.jsx";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage.jsx";
+import ResetPasswordPage from "./pages/ResetPasswordPage.jsx";
 
 //protecting the routes that requires authurized users only
 
@@ -78,6 +79,8 @@ function App() {
       <Route path='/forgot-password' element={<RedirectAuthenticatedUser>
         <ForgotPasswordPage />
       </RedirectAuthenticatedUser>} />
+
+      <Route path='/reset-password/:token' element={<RedirectAuthenticatedUser><ResetPasswordPage /></RedirectAuthenticatedUser>} />
       </Routes>
 
       <Toaster/>
