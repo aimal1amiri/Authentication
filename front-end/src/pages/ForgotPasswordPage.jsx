@@ -12,10 +12,13 @@ const ForgotPasswordPage = () => {
     const [email, setEmail] = useState('');
     const [isSubmitted, setIsSubmitted]= useState(false);
 
-    const {isLoading, forgetPassword} = useAuthenticationStore();
+    const {isLoading, forgotPassword} = useAuthenticationStore();
 
     const handleSubmit = async(e) => {
-
+        e.preventDefault();
+        await forgotPassword(email)
+        setIsSubmitted(true);
+        
     }    
 
   return (
@@ -23,14 +26,14 @@ const ForgotPasswordPage = () => {
     initial={{opacity:0, y:20}}
     animate={{opacity:1, y:0}}
     transition={{duration:0.5}}
-    className='max-w-md w-full bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden'>
+    className='max-w-md w-full bg-white bg-opacity-50 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden'>
         <div className='p-8'>
-            <h2 className='text-3xl font-bold mb-6 text-center bg-gradient-to-r from-orange-500 to-amber-700 text-transparent bg-clip-text'>
+            <h2 className='text-3xl font-bold mb-6 text-center bg-gradient-to-r from-orange-500 to-amber-800 text-transparent bg-clip-text'>
                 Forgot Password
             </h2>
             {!isSubmitted ? (
                 <form onSubmit={handleSubmit}>
-                    <p className='text-gray-500 mb-6 text-center'>
+                    <p className='text-gray-500 mb-3 text-left'>
                         Enter your email address
                     </p>
 
@@ -46,9 +49,9 @@ const ForgotPasswordPage = () => {
                     <motion.button
                     whileHover={{scale:1.02}}
                     whileTap={{scale:0.98}}
-                    className='w-full py-3 bg-gradient-to-r from-orange-500 to-amber-600 text-white font-bold rounded-lg shadow-lg hover:from-amber-700 hover:to-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition duration-200 ' 
+                    className='w-full py-3 bg-gradient-to-r from-orange-600 to-amber-500 text-white font-bold rounded-lg shadow-lg hover:from-orange-500 hover:to-amber-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition duration-200 ' 
                     type='submit'>
-                        {isLoading ? <Loader className='size-6 animate-spin mx-auto' /> : "Send Reset Link"}
+                        {isLoading ? <Loader className='size-6 animate-spin mx-auto' /> : "Send Link"}
                     </motion.button>
                 </form>
             ) : (
@@ -62,7 +65,7 @@ const ForgotPasswordPage = () => {
 
                     </motion.div>
 
-                    <p className='text-gray-300 mb-6'>
+                    <p className='text-gray-600 mb-6'>
                         You will recieve an email for {email}, if it exists
                     </p>
 
@@ -70,7 +73,7 @@ const ForgotPasswordPage = () => {
             )}
         </div>
 
-        <div className='px-8 py-4 bg-gray-600 bg-opacity-50 flex justify-center'>
+        <div className='px-8 py-4 bg-orange-600 bg-opacity-50 flex justify-center'>
             <Link to={"/login"} className='text-sm text-black hover:underline flex items-center'>
             <ArrowLeft className='h-4 w-4 mr-2 '/> Back to Login
             </Link>
