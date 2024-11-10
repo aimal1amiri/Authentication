@@ -9,6 +9,7 @@ import { useAuthenticationStore } from "./store/authentication-Store.jsx";
 import { useEffect } from "react";
 import HomePage from "./pages/HomePage.jsx";
 import LoadingSpinner from "./components/LoadingSpinner.jsx";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage.jsx";
 
 //protecting the routes that requires authurized users only
 
@@ -74,6 +75,9 @@ function App() {
       <Route path="/signup" element={<RedirectAuthenticatedUser><SignUpPage/></RedirectAuthenticatedUser>} />
       <Route path="/login" element={<RedirectAuthenticatedUser><LoginPage/></RedirectAuthenticatedUser>}/>
       <Route path="/verify-email" element={<EmailVerifyPage/>} />
+      <Route path='/forgot-password' element={<RedirectAuthenticatedUser>
+        <ForgotPasswordPage />
+      </RedirectAuthenticatedUser>} />
       </Routes>
 
       <Toaster/>
