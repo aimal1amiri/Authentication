@@ -49,7 +49,7 @@ const ForgotPasswordPage = () => {
                     <motion.button
                     whileHover={{scale:1.02}}
                     whileTap={{scale:0.98}}
-                    className='w-full py-3 bg-gradient-to-r from-orange-600 to-amber-500 text-white font-bold rounded-lg shadow-lg hover:from-orange-500 hover:to-amber-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition duration-200 ' 
+                    className='w-full py-3 bg-gradient-to-r from-orange-600 to-amber-500 text-white font-bold rounded-lg shadow-lg hover:from-orange-500 hover:to-amber-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-white transition duration-200 ' 
                     type='submit'>
                         {isLoading ? <Loader className='size-6 animate-spin mx-auto' /> : "Send Link"}
                     </motion.button>
